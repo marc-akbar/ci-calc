@@ -1,25 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testFunction } from './actions/main'
+import { testFunction } from '../actions/main'
 
-import Header from './components/header'
-import UserInput from './components/user-input'
-import ResultGraph from './components/result-graph'
-import ResultSummary from './components/result-summary'
-
-import './App.css';
-
-class App extends Component {
+class ResultSummary extends Component {
   render() {
     const { test, testFunction } = this.props;
     return (
-      <div>
-        <Header/>
-        <div onClick={ () => testFunction() }>{test}</div>
-        <UserInput/>
-        <ResultGraph/>
-        <ResultSummary/>
+      <div className='results-block'>
+        <p>(Summary of results)</p>
       </div>
     );
   }
@@ -38,4 +27,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(ResultSummary)
