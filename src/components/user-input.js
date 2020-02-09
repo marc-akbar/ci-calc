@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testFunction } from './actions/main'
+import { testFunction } from '../actions/main'
 
-import Header from './components/header'
-import UserInput from './components/user-input'
-
-import './App.css';
-
-class App extends Component {
+class UserInput extends Component {
   render() {
     const { test, testFunction } = this.props;
     return (
       <div>
-        <Header/>
-        <div onClick={ () => testFunction() }>{test}</div>
-        <UserInput/>
+        <div className='user-input'>Current Age</div>
+        <input></input>
+        <div className='user-input'>Planned Retirement Age</div>
+        <input></input>
       </div>
     );
   }
@@ -34,4 +30,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(UserInput)
