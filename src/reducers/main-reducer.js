@@ -8,10 +8,10 @@ const initialState = {
   test: "We're almost there...",
 }
 
-// const calculateMonthlyContributions = (salary1 = 0, match1 = 0, salary2 = 0, match2 = 0, percentToContribute = 0) => {
-//   return Math.round((((salary1 + salary2) * (percentToContribute/100)) + match1 + match2)/12)
-// }
-//
+const calculateMonthlyContributions = (salary1 = 0, match1 = 0, salary2 = 0, match2 = 0, percentToContribute = 0) => {
+  return Math.round((((salary1 + salary2) * (percentToContribute/100)) + match1 + match2)/12)
+}
+
 // const calculateCompoundInterest = (current_age, retirement_age, stop_contribution_age, current_savings, monthly_contribution, percent_annual_return_low, percent_annual_return_high) => {
 //   let annualSavingsValues = []
 //   let currentSavingsValueLow = current_savings
@@ -46,14 +46,13 @@ export default (state = initialState, action) => {
       }
 
     case UPDATE_INPUTS:
-
       if (action.value === ""){
         action.value = 0
       }
 
       return {
         ...state,
-        [action.input_name]: parseInt(action.value)
+        [action.input_name]: parseInt(action.value, 10)
       }
 
     case CALCULATE_MONTHLY_CONTRIBUTIONS:
