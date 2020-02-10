@@ -1,14 +1,20 @@
 import {
   TEST,
-  UPDATE_INPUTS
+  UPDATE_INPUTS,
+  CALCULATE_MONTHLY_CONTRIBUTIONS
 }from '../actions/main'
-
-const calculateMonthlyContributions = (s1 = 0, m1 = 0, s2 = 0, m2 = 0, ptc = 0) => {
-  return (((s1 + s2) * (ptc/100)) + m1 + m2 )/12
-}
 
 const initialState = {
   test: "We're almost there...",
+}
+
+const calculateMonthlyContributions = (salary1 = 0, match1 = 0, salary2 = 0, match2 = 0, percentToContribute = 0) => {
+  salary1 = parseInt(salary1)
+  salary2 = parseInt(salary2)
+  match1 = parseInt(match1)
+  match2 = parseInt(match2)
+  percentToContribute = parseInt(percentToContribute)
+  return Math.round((((salary1 + salary2) * (percentToContribute/100)) + match1 + match2)/12)
 }
 
 export default (state = initialState, action) => {
@@ -22,12 +28,16 @@ export default (state = initialState, action) => {
       }
 
     case UPDATE_INPUTS:
-      let { annual_salary_1, employer_match_1, annual_salary_2, employer_match_2, percent_to_contribute } = state
-      let monthly_contribution = calculateMonthlyContributions(annual_salary_1, employer_match_1, annual_salary_2, employer_match_2, percent_to_contribute)
-
       return {
         ...state,
         [action.input_name]: action.value,
+      }
+
+    case CALCULATE_MONTHLY_CONTRIBUTIONS:
+      let { annual_salary_1, annual_salary_2, employer_match_1, employer_match_2, percent_to_contribute } = state
+      let monthly_contribution = calculateMonthlyContributions(annual_salary_1, employer_match_1, annual_salary_2, employer_match_2, percent_to_contribute)
+      return {
+        ...state,
         monthly_contribution: monthly_contribution
       }
 

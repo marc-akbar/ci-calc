@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testFunction, updateInputs } from '../actions/main'
+import { testFunction, updateInputs, calculateMonthlyContributions } from '../actions/main'
 
 import UserContributions from './user-contributions'
 
@@ -15,6 +15,7 @@ class UserInput extends Component {
     const { test,
       testFunction,
       updateInputs,
+      calculateMonthlyContributions,
       current_age,
       retirement_age,
       stop_contribution_age,
@@ -48,7 +49,7 @@ class UserInput extends Component {
         </div>
         <div className='user-input'>
           Percentage of salary you would like to contribute
-          <input placeholder={percent_to_contribute} onChange={ (e) => updateInputs(e.target.value, 'percent_to_contribute') }></input>
+          <input placeholder={percent_to_contribute} onChange={ (e) => {updateInputs(e.target.value, 'percent_to_contribute'); calculateMonthlyContributions()} }></input>
         </div>
         <UserContributions id="1"/>
         { this.state.contributer_added ?
@@ -70,7 +71,8 @@ class UserInput extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   testFunction,
-  updateInputs
+  updateInputs,
+  calculateMonthlyContributions
 }, dispatch)
 
 const mapStateToProps = state => {
