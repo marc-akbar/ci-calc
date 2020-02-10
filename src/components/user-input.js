@@ -3,7 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { testFunction, updateInputs } from '../actions/main'
 
+import UserContributions from './user-contributions'
+
 class UserInput extends Component {
+
+  state = {
+    contributer_added: false
+  }
+
   render() {
     const { test,
       testFunction,
@@ -12,10 +19,11 @@ class UserInput extends Component {
       retirement_age,
       stop_contribution_age,
       current_savings,
-      monthly_contribution,
-      percent_annual_return
+      percent_annual_return,
+      percent_to_contribute,
+      monthly_contribution
     } = this.props;
-    console.log("Line 9 user-input.js", current_age);
+
     return (
       <div>
         <div className='user-input'>
@@ -35,12 +43,22 @@ class UserInput extends Component {
           <input placeholder={current_savings} onChange={ (e) => updateInputs(e.target.value, 'current_savings') }></input>
         </div>
         <div className='user-input'>
-          Monthly Contribution
-          <input placeholder={monthly_contribution} onChange={ (e) => updateInputs(e.target.value, 'monthly_contribution') }></input>
-        </div>
-        <div className='user-input'>
           Percentage annual return
           <input placeholder={percent_annual_return} onChange={ (e) => updateInputs(e.target.value, 'percent_annual_return') }></input>
+        </div>
+        <div className='user-input'>
+          Percentage of salary you would like to contribute
+          <input placeholder={percent_to_contribute} onChange={ (e) => updateInputs(e.target.value, 'percent_to_contribute') }></input>
+        </div>
+        <UserContributions id="1"/>
+        { this.state.contributer_added ?
+          <UserContributions id="2"/> :
+          <div className='add-user-button' onClick={ () => this.setState({ contributer_added: true }) }>
+            Add contributer
+          </div>
+        }
+        <div className='monthly-contribution'>
+          Monthly Contribution: ${monthly_contribution}
         </div>
         <div className='sumbit-button'>
           Calculate
@@ -63,7 +81,9 @@ const mapStateToProps = state => {
     stop_contribution_age: state.mainReducer.stop_contribution_age,
     current_savings: state.mainReducer.current_savings,
     monthly_contribution: state.mainReducer.monthly_contribution,
-    percent_annual_return: state.mainReducer.percent_annual_return
+    percent_annual_return: state.mainReducer.percent_annual_return,
+    percent_to_contribute: state.mainReducer.percent_to_contribute,
+    monthly_contribution: state.mainReducer.monthly_contribution
   }
 }
 

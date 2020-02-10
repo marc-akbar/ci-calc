@@ -4,8 +4,10 @@ import { bindActionCreators } from 'redux'
 import { testFunction } from '../actions/main'
 
 class ResultSummary extends Component {
+
   render() {
     const { test, testFunction } = this.props;
+    
     return (
       <div className='results-block'>
         <p>(Summary of results)</p>
