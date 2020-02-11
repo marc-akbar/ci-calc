@@ -1,37 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testFunction, updateInputs, calculateMonthlyContributions } from '../actions/main'
+import { updateInputs, calculateMonthlyContributions } from '../actions/main'
+
+const formFields= [
+  {title: 'Annual salary', input_name: 'annual_salary_'},
+  {title: 'Employer Match', input_name: 'employer_match_'}
+]
 
 class UserInput extends Component {
 
-  render() {
-    const { test, testFunction, updateInputs, id, calculateMonthlyContributions } = this.props;
+  createForm = () => {
+    const { updateInputs, id, calculateMonthlyContributions } = this.props;
+    return formFields.map(field => {
+      return (
+        <div key={`${field.input_name}${id}`} className='user-input'>
+          {field.title}
+          <input onChange={ (e) => {updateInputs(e.target.value, `${field.input_name}${id}`); calculateMonthlyContributions()} }/>
+        </div>
+      )
+    })
+  }
 
+  render() {
     return (
       <div>
-        <div className='user-input'>
-          Annual salary
-          <input onChange={ (e) => {updateInputs(e.target.value, `annual_salary_${id}`); calculateMonthlyContributions()} }></input>
-        </div>
-        <div className='user-input'>
-          Employer Match
-          <input onChange={ (e) => {updateInputs(e.target.value, `employer_match_${id}`); calculateMonthlyContributions()} }></input>
-        </div>
+        {this.createForm()}
       </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  testFunction,
   updateInputs,
   calculateMonthlyContributions
 }, dispatch)
 
 const mapStateToProps = state => {
   return {
-    test: state.mainReducer.test,
   }
 }
 
