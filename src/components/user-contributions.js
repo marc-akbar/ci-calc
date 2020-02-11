@@ -8,7 +8,7 @@ const formFields= [
   {title: 'Employer Match', input_name: 'employer_match_'}
 ]
 
-class UserInput extends Component {
+class UserContributions extends Component {
 
   createForm = () => {
     const { updateInputs, id, calculateMonthlyContributions } = this.props;
@@ -16,6 +16,7 @@ class UserInput extends Component {
       return (
         <div key={`${field.input_name}${id}`} className='user-input'>
           {field.title}
+          <br/>
           <input onChange={ (e) => {updateInputs(e.target.value, `${field.input_name}${id}`); calculateMonthlyContributions()} }/>
         </div>
       )
@@ -44,4 +45,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserInput)
+)(UserContributions)

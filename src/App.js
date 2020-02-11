@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { testFunction } from './actions/main'
 
 import Header from './components/header'
-import UserInput from './components/user-input'
+import UserInputs from './components/user-inputs'
 import ResultGraph from './components/result-graph'
 import ResultSummary from './components/result-summary'
 
@@ -12,12 +12,11 @@ import './App.css';
 
 class App extends Component {
   render() {
-    const { test, testFunction } = this.props;
+    const { } = this.props;
     return (
-      <div>
+      <div className="App">
         <Header/>
-        <div onClick={ () => testFunction() }>{test}</div>
-        <UserInput/>
+        <UserInputs/>
         <ResultGraph/>
         <ResultSummary/>
       </div>

@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testFunction } from '../actions/main'
+import {  } from '../actions/main'
 
 class Header extends Component {
 
   render() {
-    const { test, testFunction } = this.props;
-    
+    const {  } = this.props;
+
     return (
-      <div className='header'>
-        <p>Some shit</p>
-      </div>
+      <header className='header-container'>
+        <h3>This will be the header title</h3>
+        <p>
+        This is placeholder text for the header
+        <br/>
+        The header will contain information about the app
+        </p>
+      </header>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  testFunction
+
 }, dispatch)
 
 const mapStateToProps = state => {
   return {
-    test: state.mainReducer.test,
+
   }
 }
 

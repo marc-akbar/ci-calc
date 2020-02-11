@@ -7,9 +7,9 @@ class ResultGraph extends Component {
 
   render() {
     const { test, testFunction } = this.props;
-    
+
     return (
-      <div className='graph'>
+      <div className='result-graph-container'>
         <p>(Graph)</p>
       </div>
     );

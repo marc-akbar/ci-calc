@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testFunction } from '../actions/main'
+import {  } from '../actions/main'
 
 class ResultSummary extends Component {
 
   render() {
-    const { test, testFunction } = this.props;
-    
+    const { monthly_contribution } = this.props;
+
     return (
-      <div className='results-block'>
+      <div className='result-summary-container'>
         <p>(Summary of results)</p>
+
+        <div className='monthly-contribution'>
+          Monthly Contribution: ${monthly_contribution}
+        </div>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  testFunction
+
 }, dispatch)
 
 const mapStateToProps = state => {
   return {
-    test: state.mainReducer.test,
+    monthly_contribution: state.mainReducer.monthly_contribution,
   }
 }
 
